@@ -13,7 +13,7 @@
 
 #### iOS
 
-1. pod 'react-native-douyin', :path => '../node_modules/react-native-douyin/react-native-douyin.podspec'
+1. pod 'react-native-douyin-lib', :path => '../node_modules/react-native-douyin-lib/react-native-douyin-lib.podspec'
 
 2. 为了保证可以正常唤起抖音短视频，在 info 标签栏的Custom iOS Target Properties中找到 LSApplicationQueriesSchemes 如果没有点击“+”添加一个并设置 Key 为LSApplicationQueriesSchemes, Value 类型为数组，将如下配置粘贴到数组中：
 
@@ -90,7 +90,7 @@
 
 ## Usage
 ```javascript
-import Douyin from 'react-native-douyin';
+import Douyin from 'react-native-douyin-lib';
 ```
 
 #### init(appKey) 注册
@@ -109,10 +109,10 @@ import Douyin from 'react-native-douyin';
 | ------- | ------ | ----------------------------------- |
 | authCode | String | code 抖音用户凭证         |
 
-#### shareVideo(path,isPublish) 注册
+#### share(path,isPublish) 注册
 该方法目前不完善，后续完成
 
-- `path` {String} 文件路径
+- `path` {String[]} 文件路径
 
 - `isPublish` {Boolean} 是否直接进入发布
 

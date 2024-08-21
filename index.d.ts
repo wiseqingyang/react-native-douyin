@@ -2,7 +2,7 @@
  * @Author: 唉诺
  * @Date: 2021-04-30 23:31:46
  */
-declare module "react-native-douyin" {
+declare module "react-native-douyin-lib" {
   export interface IApiResponse {
     code: number;
     msg: string;

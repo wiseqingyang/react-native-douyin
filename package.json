@@ -1,5 +1,5 @@
 {
-  "name": "react-native-douyin",
+  "name": "react-native-douyin-lib",
   "title": "React Native Douyin",
   "version": "1.1.0",
   "description": "抖音登录、分享",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/z448401921/react-native-douyin.git",
-    "baseUrl": "https://github.com/z448401921/react-native-douyin"
+    "url": "git+https://github.com/wiseqingyang/react-native-douyin.git",
+    "baseUrl": "https://github.com/wiseqingyang/react-native-douyin"
   },
   "keywords": [
     "react-native"
   ],
   "author": {
-    "name": "ainuo",
-    "email": "448401921@qq.com"
+    "name": "wiseqingyang",
+    "email": "wiseqingyang@163.com"
   },
   "license": "MIT",
   "licenseFilename": "LICENSE",
