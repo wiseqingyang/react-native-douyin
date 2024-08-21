@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.dependency "React"
-  s.dependency "DouyinOpenSDK","4.0.0"
+  s.dependency "DouyinOpenSDK"
 	
   # s.dependency "..."
 end
