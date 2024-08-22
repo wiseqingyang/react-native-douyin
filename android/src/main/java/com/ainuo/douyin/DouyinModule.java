@@ -9,6 +9,8 @@ import com.bytedance.sdk.open.aweme.CommonConstants;
 import com.bytedance.sdk.open.aweme.authorize.model.Authorization;
 import com.bytedance.sdk.open.aweme.base.ImageObject;
 import com.bytedance.sdk.open.aweme.base.MediaContent;
+import com.bytedance.sdk.open.aweme.base.ShareParam;
+import com.bytedance.sdk.open.aweme.base.TitleObject;
 import com.bytedance.sdk.open.aweme.base.VideoObject;
 import com.bytedance.sdk.open.aweme.common.handler.IApiEventHandler;
 import com.bytedance.sdk.open.aweme.common.model.BaseReq;
@@ -25,6 +27,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 
 import java.io.File;
@@ -149,7 +152,7 @@ public class DouyinModule extends ReactContextBaseJavaModule implements Lifecycl
     ;
 
     @ReactMethod
-    public void shareVideo(ReadableArray fileNames, Boolean isPublish, Promise promise) {
+    public void shareVideo(ReadableMap config, Promise promise) {
 
         if (douyinOpenApi == null) {
             WritableMap map = Arguments.createMap();
@@ -158,6 +161,11 @@ public class DouyinModule extends ReactContextBaseJavaModule implements Lifecycl
             promise.resolve(map);
             return;
         }
+
+        ReadableArray fileNames = config.getArray("videos");
+        Boolean isPublish = config.getBoolean("isPublish");
+        String shortTitle = config.getString("shortTitle");
+        String title = config.getString("title");
 
         if (douyinOpenApi.isShareSupportFileProvider() &&
                 android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -178,6 +186,15 @@ public class DouyinModule extends ReactContextBaseJavaModule implements Lifecycl
             request.mMediaContent = content;
             //指定当前类名
             request.callerLocalEntry = callerLocalEntry;
+
+            request.newShare = true;
+            ShareParam shareParam = new ShareParam();
+            request.shareParam = shareParam;
+
+            TitleObject titleObject = new TitleObject();
+            shareParam.titleObject = titleObject;
+            titleObject.shortTitle = shortTitle;   // 抖音30.0.0版本开始支持该字段
+            titleObject.title = title;
 
             if (douyinOpenApi.isAppSupportShareToPublish() && isPublish) {
                 request.shareToPublish = true;
