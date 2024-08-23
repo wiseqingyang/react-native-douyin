@@ -1,10 +1,14 @@
-# react-native-douyin
+# react-native-douyin-lib
 
 ## Getting started
 
-`$ npm install react-native-douyin --save`
+`$ npm install react-native-douyin-lib --save`
 
 ### Mostly automatic installation
+
+RN > 0.59 you need do nothing
+
+else
 
 `$ react-native link react-native-douyin`
 
@@ -20,9 +24,10 @@
  ```
 <key>LSApplicationQueriesSchemes</key>
 <array> 
-<string>douyinopensdk</string> 
-<string>douyinsharesdk</string> 
+<string>douyinliteopensdk</string>
 <string>snssdk1128</string>
+<string>douyinsharesdk</string>
+<string>douyinopensdk</string>
 </array>
   ```
 
@@ -74,13 +79,15 @@
 #### Android
 
 1. React Native 0.60以上会自动链接，其他请手动集成
-2. 如遇sdk下载失败,在gradle文件中添加：
+2. 如遇sdk下载失败,在 project 级别 build.gradle文件中添加：
 
-  	```
+  	```gradle
+   allprojects {
 		 repositories {
-			...
-        maven { url 'https://dl.bintray.com/aweme-open-sdk-team/public' }
+			   ...
+            maven { url 'https://dl.bintray.com/aweme-open-sdk-team/public' }
 		 }
+   }
   	```
 3. 若您的应用的代码存在混淆，若在混淆的情况下存在不能吊起分享的情况，请在您的proguard文件中添加 -keep class com.bytedance.sdk.open.aweme.**
 
@@ -95,6 +102,8 @@ import Douyin from 'react-native-douyin-lib';
 
 #### init(appKey) 注册
 
+App 启动后合理的地方初始化。
+
 - `appKey` {String} 
 
 #### auth(scope,state) 注册
@@ -105,16 +114,27 @@ import Douyin from 'react-native-douyin-lib';
 
 成功的返回:
 
-| name    | type   | description                         |
-| ------- | ------ | ----------------------------------- |
-| authCode | String | code 抖音用户凭证         |
+```ts
+interface  IResponse {
+   msg: string;
+   code: number;
+   data: {
+      authCode: string;
+      state: string;
+   }
+}
+```
 
-#### share(path,isPublish) 注册
+#### shareVideo(config) 注册
 该方法目前不完善，后续完成
 
-- `path` {String[]} 文件路径
-
-- `isPublish` {Boolean} 是否直接进入发布
-
+```
+interface IShareVideoConfig {
+   videos: string[]; // 本地路径
+   isPublish: boolean; // 是否跳转到发布页
+   title: string; // 标题
+   shortTitle: string; // 短标题
+}
+```
 |
 
