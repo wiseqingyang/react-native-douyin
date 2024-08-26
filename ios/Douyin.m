@@ -76,9 +76,9 @@ RCT_EXPORT_METHOD(shareVideo:(NSDictionary*) config
     
     NSArray* filePaths = [config valueForKey:@"videos"];
     
-    BOOL isPublish = [config[@"isPublish"] boolValue];
-    NSString* shortTitle = [config[@"shortTitle"] stringValue];
-    NSString* title = [config[@"title"] stringValue];
+    BOOL isPublish = config[@"isPublish"];
+    NSString* shortTitle = config[@"shortTitle"];
+    NSString* title = config[@"title"];
     
     DouyinOpenSDKShareRequest *req = [[DouyinOpenSDKShareRequest alloc] init];
     req.mediaType = DouyinOpenSDKShareMediaTypeVideo;
